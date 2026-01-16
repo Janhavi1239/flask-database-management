@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teachers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background: #f0f4f8;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        nav {
+            margin-bottom: 20px;
+        }
+        nav a {
+            margin-right: 15px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .add-btn {
+            display: inline-block;
+            margin-bottom: 15px;
+            background: #27ae60;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: white;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #9b59b6;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .empty {
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Teacher Management</h1>
+
+<a href="{{ url_for('add_teacher') }}" class="add-btn">+ Add Teacher</a>
+
+<nav>
+    <a href="{{ url_for('index') }}">Students</a>
+    <a href="{{ url_for('courses') }}">Courses</a>
+    <a href="{{ url_for('teachers') }}">Teachers</a>
+</nav>
+
+{% if teachers %}
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Subject</th>
+    </tr>
+
+    {% for teacher in teachers %}
+    <tr>
+        <td>{{ teacher.id }}</td>
+        <td>{{ teacher.name }}</td>
+        <td>{{ teacher.email }}</td>
+        <td>{{ teacher.subject }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p class="empty">No teachers found.</p>
+{% endif %}
+
+<hr>
+<p><strong>ORM Power:</strong> Teacher data is fetched using SQLAlchemy ORM queries.</p>
+
+</body>
+</html>
